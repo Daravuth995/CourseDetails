@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>វគ្គសិក្សាថ្មី: ពង្រឹងសមត្ថភាពការនិយាយ</title>
+<!-- Add AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<!-- Add Koulen Khmer font -->
+<link href="https://fonts.googleapis.com/css2?family=Koulen&family=Kantumruy:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Kantumruy:wght@300;400;600;700&display=swap');
+
+  :root {
+    --primary: #ffd54f;
+    --primary-dark: #ffc107;
+    --secondary: #764ba2;
+    --secondary-light: #8561c5;
+    --accent: #ff4081;
+    --dark: #1a1a2e;
+    --light: #f8f9fa;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Kantumruy', sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2, #ff7e5f);
+    background-size: 400% 400%;
+    color: var(--light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+    animation: gradientBG 15s ease infinite;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    background: rgba(26, 26, 46, 0.85);
+    max-width: 650px;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    transform: translateY(0);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+  }
+
+  .container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-align: center;
+    color: var(--primary);
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    position: relative;
+    padding-bottom: 15px;
+    font-family: 'Koulen', cursive;
+    letter-spacing: 1px;
+  }
+
+  h1::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  h2 {
+    color: var(--primary);
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 30px 0;
+  }
+
+  ul li {
+    background: rgba(133, 97, 197, 0.7);
+    margin: 15px 0;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(133, 97, 197, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border-left: 5px solid var(--primary);
+  }
+
+  ul li::before {
+    content: '✓';
+    color: var(--primary);
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  ul li:hover {
+    transform: translateX(10px);
+    background: rgba(133, 97, 197, 0.9);
+    box-shadow: 0 6px 20px rgba(133, 97, 197, 0.6);
+  }
+
+  .price {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    margin: 30px 0;
+    color: var(--primary);
+    padding: 20px;
+    background: rgba(255, 213, 79, 0.1);
+    border-radius: 10px;
+    border: 1px dashed var(--primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-container {
+    position: relative;
+  }
+
+  .special-offer-img {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 550px;
+    height: 200px;
+    z-index: 2;
+    animation: pulse 2s infinite, float 4s ease-in-out infinite;
+  }
+
+  /* Flash sale animation for price section */
+  .price::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+      #ff0000, #ff7300, #fffb00, #48ff00, 
+      #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+    background-size: 400%;
+    border-radius: 12px;
+    z-index: -1;
+    animation: flashSale 20s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .price:hover::before {
+    opacity: 1;
+  }
+
+  @keyframes flashSale {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+  }
+
+  .price::after {
+    content: 'ការបញ្ចុះតម្លៃ';
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent);
+    color: white;
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    transform: rotate(15deg);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    animation: pulse 1.5s infinite;
+  }
+
+  .schedule {
+    background: rgba(81, 45, 168, 0.7);
+    padding: 25px;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-top: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
+  }
+
+  .schedule:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 25px rgba(81, 45, 168, 0.5);
+  }
+
+  .schedule h2 {
+    margin-top: 0;
+  }
+
+  .schedule-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .schedule-item {
+    background: rgba(118, 75, 162, 0.5);
+    padding: 12px 15px;
+    border-radius: 8px;
+    transition: all 0.4s ease;
+    transform: translateY(0);
+    position: relative;
+    overflow: hidden;
+    border-left: 3px solid var(--primary);
+  }
+
+  .schedule-item::before {
+    content: '⏱️';
+    margin-right: 10px;
+  }
+
+  .schedule-item:hover {
+    transform: translateY(-5px);
+    background: rgba(118, 75, 162, 0.7);
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+    animation: bounce 0.5s ease infinite alternate;
+  }
+
+  @keyframes bounce {
+    0% { transform: translateY(-5px); }
+    100% { transform: translateY(-8px); }
+  }
+
+  .schedule-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+  }
+
+  .schedule-item:hover::after {
+    transform: translateX(100%);
+  }
+
+  .cta-btn {
+    display: block;
+    width: 100%;
+    padding: 18px 0;
+    margin-top: 40px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--secondary);
+    background-color: var(--primary);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(255, 213, 79, 0.5);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .cta-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    z-index: -1;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.4s ease;
+  }
+
+  .cta-btn:hover {
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(255, 213, 79, 0.7);
+  }
+
+  .cta-btn:hover::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .cta-btn:active {
+    transform: translateY(1px);
+  }
+
+  .zoom-info {
+    margin-top: 20px;
+    font-size: 1.1rem;
+    text-align: center;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .zoom-info strong {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .limited-offer {
+    animation: pulse 2s infinite;
+    text-align: center;
+    font-weight: 600;
+    margin-top: 20px;
+    color: var(--accent);
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Floating animation for container */
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .container {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  /* Student Counter Styles */
+  .student-counter {
+    background: rgba(255, 64, 129, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 25px 0;
+    text-align: center;
+    border: 1px solid var(--accent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .counter-text {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+
+  .counter-numbers {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .counter-current {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    min-width: 40px;
+    text-align: center;
+  }
+
+  .counter-total {
+    font-size: 1.2rem;
+    color: #ccc;
+  }
+
+  .counter-bar {
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 5px;
+    margin-top: 10px;
+    overflow: hidden;
+  }
+
+  .counter-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--primary));
+    width: 80%;
+    animation: progressGrow 6s ease-out forwards;
+  }
+
+  @keyframes progressGrow {
+    from { width: 80%; }
+    to { width: 92%; }
+  }
+
+  /* Audio Sample Styles */
+  .audio-sample {
+    background: rgba(118, 75, 162, 0.3);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 25px 0;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+  }
+
+  .audio-sample:hover {
+    transform: scale(1.01);
+    box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+  }
+
+  .audio-sample p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .container {
+      padding: 30px 20px;
+      max-width: 90%;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    ul li {
+      font-size: 1rem;
+      padding: 12px 15px;
+    }
+    .price {
+      font-size: 1.2rem;
+    }
+    .special-offer-img {
+      width: 160px;
+      height: 130px;
+      top: 100px;
+      right: -40px;
+    }
+    .counter-current {
+      font-size: 1.8rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1 data-aos="fade-down" data-aos-duration="800">វគ្គសិក្សាថ្មី: ពង្រឹងសមត្ថភាពការនិយាយ</h1>
+  <h2 data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">កម្រឹតថ្នាក់: កម្រឹតទាប ដល់ មធ្យម!</h2>
+
+  <ul>
+    <li data-aos="fade-right" data-aos-delay="300">សិក្សាទៅលើពាក្យថ្មីៗ</li>
+    <li data-aos="fade-right" data-aos-delay="400">ពង្រឹងការលើកដាក់សម្លេង</li>
+    <li data-aos="fade-right" data-aos-delay="500">បង្កើតទំនុកចិត្តក្នុងការនិយាយ</li>
+    <li data-aos="fade-right" data-aos-delay="600">ការបញ្ចេញសម្លេងឲ្យបានត្រឹមត្រូវ</li>
+    <li data-aos="fade-right" data-aos-delay="700">វឹកហាត់ style ក្នុងការបញ្ចេញសម្លេងឲ្យស្ទាត់ជំនាញ</li>
+    <li data-aos="fade-right" data-aos-delay="800">តិចនិចក្នុងការនិយាយឲ្យមានភាពទាក់ទាញ</li>
+  </ul>
+
+  <div class="price-container">
+    <img src="https://www.dropbox.com/scl/fi/2zah8yx0q5yxjr06pjnwk/Pngtree-abstract-design-special-offer_7288842.png?rlkey=pxgeemu5h1dpyoww9hx2fvcn0&st=ws91l5tk&raw=1" alt="Special Offer" class="special-offer-img">
+    <p class="price" data-aos="zoom-in" data-aos-delay="900">
+      ✨ តម្លៃសិក្សាពេញ (20$) មកត្រឹមតែ <strong>$18/ខែ</strong><br />
+      សម្រាប់ <strong>25 នាក់ដំបូង</strong>!
+    </p>
+  </div>
+
+  <div class="student-counter" data-aos="fade-up" data-aos-delay="1000">
+    <div class="counter-text">សិស្សានុសិស្សបានចុះឈ្មោះហើយ</div>
+    <div class="counter-numbers">
+      <div class="counter-current" id="student-counter">20</div>
+      <div class="counter-total">/ 25</div>
+    </div>
+    <div class="counter-bar">
+      <div class="counter-progress"></div>
+    </div>
+  </div>
+
+  <p class="limited-offer" data-aos="fade" data-aos-delay="1100">ចំនួនសិស្សត្រូវបានកំណត់ត្រឹម 25នាក់ ប៉ុណ្ណោះ!</p>
+
+  <p class="zoom-info" data-aos="fade-up" data-aos-delay="1200">🔰 សិក្សាផ្ទាល់តាមរយៈ: <strong>Zoom</strong></p>
+
+  <div class="schedule" data-aos="flip-up" data-aos-delay="1300">
+    <h2>កាលវិភាគសិក្សា</h2>
+    <div class="schedule-items">
+      <div class="schedule-item">4pm-5pm ល្ងាច</div>
+      <div class="schedule-item">7pm-8pm ល្ងាច</div>
+      <div class="schedule-item">9pm-10pm យប់</div>
+      <div class="schedule-item">(ច័ន្ទ រហូតដល់ សុក្រ)</div>
+    </div>
+  </div>
+
+  <section class="section" data-aos="fade-up" data-aos-delay="1400">
+    <h2>🎧 គំរូនៃការអនុវត្តន៍ការបញ្ចេញសម្លេង</h2>
+    <div class="audio-sample">
+      <p>🎵ខាងក្រោមជាគំរូការអនុវត្តន៍ការស្តាប់ក្នុងថ្នាក់រៀន៖</p>
+      <audio id="audio-player" controls style="width: 100%;">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+  </section>
+
+  <a href="https://m.me/118236450452894" class="cta-btn" data-aos="zoom-in" data-aos-delay="1200">ចុះឈ្មោះឥលូវនេះ!</a>
+</div>
+
+<!-- Add AOS JS -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  // Initialize AOS
+  AOS.init({
+    duration: 800,
+    easing: 'ease-out-quad',
+    once: true,
+    offset: 50
+  });
+
+  // Animated student counter
+  const counter = document.getElementById('student-counter');
+  const startValue = 20;
+  const endValue = Math.random() > 0.5 ? 23 : 24; // Randomly stop at 23 or 24
+  const duration = 8000; // 8 seconds for slower counting
+  let startTime = null;
+
+  function animateCounter(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    const currentValue = Math.floor(progress * (endValue - startValue) + startValue);
+    counter.textContent = currentValue;
+    
+    // Update progress bar
+    document.querySelector('.counter-progress').style.width = `${(currentValue/25)*100}%`;
+    
+    if (progress < 1) {
+      window.requestAnimationFrame(animateCounter);
+    }
+  }
+
+  // Start counter animation after 1 second delay
+  setTimeout(() => {
+    window.requestAnimationFrame(animateCounter);
+  }, 1000);
+
+  // Audio player setup
+  const originalDropboxLink = "https://www.dropbox.com/scl/fi/jx9w5ayleku4t0ziqh3mq/Yon-Daravuth-Sound-Detective-Exercise.m4a?rlkey=nfvhriehlil8717pfikdnieyp&st=9jdpxi2j&dl=0";
+  const streamableLink = originalDropboxLink.replace("dl=0", "raw=1");
+  document.getElementById("audio-player").src = streamableLink;
+
+  // Continuous dropdown animation for schedule items
+  const scheduleItems = document.querySelectorAll('.schedule-item');
+  
+  function startContinuousAnimation() {
+    scheduleItems.forEach((item, index) => {
+      // Stagger the animations
+      setTimeout(() => {
+        item.style.animation = 'bounce 0.5s ease infinite alternate';
+        
+        // After 3 seconds, stop this animation and start the next one
+        setTimeout(() => {
+          item.style.animation = 'none';
+          setTimeout(() => {
+            if (index === scheduleItems.length - 1) {
+              // Restart the sequence after all items have animated
+              setTimeout(startContinuousAnimation, 1000);
+            }
+          }, 100);
+        }, 3000);
+      }, index * 1000);
+    });
+  }
+
+  // Start the continuous animation sequence
+  setTimeout(startContinuousAnimation, 2000);
+</script>
+</body>
+</html>
